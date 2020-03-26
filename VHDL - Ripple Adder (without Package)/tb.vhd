@@ -25,8 +25,8 @@ begin
 	--------- start of stimulus section ------------------	
         tb : process
         begin
-		  x <= "0111";
-		  y <= "1111";
+		  x <= "0000";
+		  y <= "0001";
 		  cin<='0';
 		  sel<="00";
 		  for i in 0 to 2 loop

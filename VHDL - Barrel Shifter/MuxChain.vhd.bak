@@ -5,8 +5,8 @@ ENTITY MuxChain IS
   GENERIC (n : INTEGER := 4);
   PORT (     xi: IN STD_LOGIC_VECTOR (2*n-1 DOWNTO 0);
 			 y: IN STD_LOGIC;
-              
-			 zi: OUT STD_LOGIC_VECTOR(n-1 downto 0));
+             zi: OUT STD_LOGIC_VECTOR(n-1 downto 0));
+             
 END MuxChain;
 --------------------------------------------------------------
 ARCHITECTURE dMuxChain OF MuxChain IS
@@ -18,10 +18,10 @@ BEGIN
 	
 	SETUP : for i in 0 to n-1 generate
 		chain : MUX port map(
-			x1 => x1(2*i),
-			x2 => x2(2*i+1),
+			x1 => xi(2*i),
+			x2 => xi(2*i+1),
 			y => y,
-			z => zi(i),
+			z => zi(i)
 		);
 	end generate;
 	

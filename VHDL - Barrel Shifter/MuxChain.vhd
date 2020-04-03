@@ -5,8 +5,7 @@ ENTITY MuxChain IS
   GENERIC (n : INTEGER := 4);
   PORT (     xi: IN STD_LOGIC_VECTOR (2*n-1 DOWNTO 0);
 			 y: IN STD_LOGIC;
-              
-			 zi: OUT STD_LOGIC_VECTOR(n-1 downto 0));
+             zi: OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0));             
 END MuxChain;
 --------------------------------------------------------------
 ARCHITECTURE dMuxChain OF MuxChain IS

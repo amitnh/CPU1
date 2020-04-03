@@ -16,27 +16,26 @@ COMPONENT MuxChain IS
 			y: IN STD_LOGIC;             
 			zi: OUT STD_LOGIC_VECTOR(n-1 downto 0));
 END COMPONENT;
-	TYPE matrix is array (0 to m-1,2*n-1 downto 0) OF STD_LOGIC;
-	SIGNAL w : std_logic_vector(n-1 DOWNTO 0);
-	SIGNAL entry: matrix; -- matrix of entries to each muxChain
-
+	TYPE matrix is array (0 to m-1) OF STD_LOGIC_VECTOR (2*n-1 downto 0);
+	--TYPE matrix is array (0 to m-1,2*n-1 downto 0) OF STD_LOGIC;
+	SIGNAL entry,exitMat: matrix;-- matrix of entries/exits to each muxChain
+	
 BEGIN
 	entry <= (OTHERS=>(OTHERS=>'0'));
-	w<=x;
-	yFor: for j in 1 to n-1 GENERATE
-		muxFor:for i in 0 to m-1 GENERATE
-			entry(i,(2*j+1))<=w(j);
-			IF (((2**i-1)*2+1+2*j+1)<2*n) then
-				entry(i,(2**i-1)*2+1+2*j+1)<=w(j);
-			END IF;
-		chain : MuxChain port map(
-			xi => entry(i),
-			y => yi(i),
-			zi=>w --- check
-		);
-		END GENERATE;
-	END GENERATE;	
-	s<=w;
-
+	exitMat(0)<=x;
+		yFor:for i in 0 to m-1 GENERATE
+			muxFor:for j in 0 to n-1 GENERATE
+				entry(i)(2*j+1)<=exitMat(i)(j);
+				--IF (((2**i-1)*2+1+2*j+1) <= (2*n+1)) then
+				entry(i)((2**i-1)*2+1+2*j+1)<=exitMat(i)(j);
+				--END IF;
+			END GENERATE;
+			chain : MuxChain port map(
+				xi => entry(i),
+				y => yi(i),
+				zi=>exitMat(i) --- check
+			);
+		END GENERATE;	
+		s<=exitMat(m-1);
 END dbs;
 

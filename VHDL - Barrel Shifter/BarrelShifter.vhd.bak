@@ -32,7 +32,7 @@ BEGIN
 		chain : MuxChain port map(
 			xi => entry(i),
 			y => yi(i),
-			zi=>w --- check
+			zi=>w
 		);
 		END GENERATE;
 	END GENERATE;	

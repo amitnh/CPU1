@@ -8,5 +8,5 @@ END MUX;
 --------------------------------------------------------
 ARCHITECTURE dataflow OF MUX IS
 BEGIN
-	Z<= x1 when (y = '0' ) else x2;
+	Z<= x2 when (y = '0' ) else x1;
 END dataflow;

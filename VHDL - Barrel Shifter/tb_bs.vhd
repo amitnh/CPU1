@@ -7,19 +7,19 @@ use ieee.std_logic_unsigned.all;
 
 
 entity tb_bs is
-  GENERIC (n : INTEGER := 32;m : INTEGER := 4);
+  GENERIC (n : INTEGER :=8 ;m : INTEGER :=3);
 end tb_bs;
 
 architecture rtl of tb_bs is  
 COMPONENT BarrelShfter IS
   GENERIC (n : INTEGER;m : INTEGER);
   PORT (    x: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
-			yi: IN STD_LOGIC_VECTOR (m-1 DOWNTO 0);
+			yi: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
             s: OUT STD_LOGIC_VECTOR(n-1 downto 0));
 END COMPONENT;
 
 signal  x:STD_LOGIC_VECTOR (n-1 DOWNTO 0);
-signal	yi :STD_LOGIC_VECTOR (m-1 DOWNTO 0);
+signal	yi :STD_LOGIC_VECTOR (n-1 DOWNTO 0);
 signal	s :STD_LOGIC_VECTOR(n-1 downto 0);
 
 begin
@@ -30,9 +30,9 @@ begin
         testbench : process
         begin
           --------- start of stimulus section - ver1 ------------------
-          x <="11111111111111111111111111111111";
-		   yi <="0000";
-		   for i in 0 to 31 loop
+          x <="11111111";
+		   yi <="00000000";
+		   for i in 0 to 5 loop
 			wait for 50 ns;
 			yi <= yi +1;
 		  end loop;

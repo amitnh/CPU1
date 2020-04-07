@@ -2,7 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 -------------------------------------
 ENTITY Adder IS
-  GENERIC (n : INTEGER := 4);
+  GENERIC (n : INTEGER);
   PORT (     cin: IN STD_LOGIC;
 			 x,y: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
 			 sel: IN STD_LOGIC_VECTOR (1 DOWNTO 0);

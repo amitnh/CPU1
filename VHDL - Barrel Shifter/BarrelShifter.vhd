@@ -3,15 +3,15 @@ USE ieee.std_logic_1164.all;
 USE IEEE.math_real.all;
 -------------------------------------
 ENTITY BarrelShfter IS
-  GENERIC (n : INTEGER := 8;m : INTEGER := 3);
+  GENERIC (n : INTEGER;m : INTEGER);
   PORT (    x: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
-			yi: IN STD_LOGIC_VECTOR (m-1 DOWNTO 0);
+			yi: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
             s: OUT STD_LOGIC_VECTOR(n-1 downto 0));
 END BarrelShfter;
 --------------------------------------------------------------
 ARCHITECTURE dbs OF BarrelShfter IS
 COMPONENT MuxChain IS
-  GENERIC (n : INTEGER := 8);
+  GENERIC (n : INTEGER);
   PORT (    xi: IN STD_LOGIC_VECTOR (2*n-1 DOWNTO 0);
 			y: IN STD_LOGIC;             
 			zi: OUT STD_LOGIC_VECTOR(n-1 downto 0));

@@ -29,8 +29,7 @@ BEGIN
 		yi => Y,
 		s =>bsResultbsResult
 	);
-	bsResWithZero(n-1 downto 0) <=bsResultbsResult; -- 0 for the n+1 output we need to send
-	bsResWithZero(n) <= '0';
+	bsResWithZero => '0' & bsResultbsResult; -- 0 for the n+1 output we need to send
 	OutSel:outputSelector generic map (n=>n) port map ( 
 		adderResult => adderResult,
 		bsResultbsResult => bsResWithZero, 

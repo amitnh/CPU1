@@ -12,30 +12,29 @@ ENTITY top IS
 END top;
 ------------- complete the top Architecture code --------------
 ARCHITECTURE struct OF top IS
-	SIGNAL adderResult : std_logic_vector(n DOWNTO 0);
-	SIGNAL bsResultbsResult : std_logic_vector(n-1 DOWNTO 0);
-	SIGNAL bsResWithZero : std_logic_vector(n DOWNTO 0);
+	SIGNAL adderRes : std_logic_vector(n DOWNTO 0);
+	SIGNAL bsResultbsRes : std_logic_vector(n DOWNTO 0);
+	SIGNAL XwithZero : std_logic_vector(n DOWNTO 0); -- for the BarrelShfter
 	
 BEGIN
-	AddSub:Adder generic map (n=>n) port map (
+	XwithZero <= '0' & X;
+	AddSub:Adder generic map (n) port map (
 		cin => cin,
-		x => X,		y => Y,
+		x => X,y => Y,
 		sel => sel, 
-		s => adderResult(n-1 downto 0),
-		cout =>adderResult(n)
+		s => adderRes(n-1 downto 0),
+		cout =>adderRes(n)
 	);
-	Bshifter:BarrelShfter generic map (n=>n,m=>3) port map ( -- we did also Y(m) generic as a Bonus
-		x => X,
+	Bshifter:BarrelShfter generic map (n+1,3) port map ( -- we did also Y(m) generic as a Bonus
+		x => XwithZero,
 		yi => Y,
-		s =>bsResultbsResult
+		s =>bsResultbsRes
 	);
-	bsResWithZero(n-1 downto 0) <=bsResultbsResult; -- 0 for the n+1 output we need to send
-	bsResWithZero(n) <= '0';
-	OutSel:outputSelector generic map (n=>n) port map ( 
-		adderResult => adderResult,
-		bsResultbsResult => bsResWithZero, 
+	OutSel:outputSelector generic map (n) port map (
+		adderResult => adderRes,
+		bsResultbsResult => bsResultbsRes, 
 		sel =>sel,
-		result =>result
+		res =>result
 	);
 	
 

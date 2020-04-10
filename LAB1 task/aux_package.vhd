@@ -12,9 +12,9 @@ package aux_package is
 		  result: OUT STD_LOGIC_VECTOR(n downto 0));
 	end component;
 component BarrelShfter IS
-  GENERIC (n : INTEGER; m : INTEGER := 3);
+  GENERIC (n : INTEGER; m : INTEGER);
   PORT (    x: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
-			yi: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
+			yi: IN STD_LOGIC_VECTOR (n-2 DOWNTO 0);
             s: OUT STD_LOGIC_VECTOR(n-1 downto 0));
 END component;  
  component Adder IS
@@ -29,7 +29,7 @@ END component;
   GENERIC (n : INTEGER);
   PORT (    adderResult,bsResultbsResult: IN STD_LOGIC_VECTOR (n DOWNTO 0);
 			sel: IN STD_LOGIC_VECTOR (1 DOWNTO 0);
-            result: OUT STD_LOGIC_VECTOR(n downto 0));
+            res: OUT STD_LOGIC_VECTOR(n downto 0));
 END component outputSelector;
   
   

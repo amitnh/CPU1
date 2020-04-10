@@ -13,29 +13,31 @@ END top;
 ------------- complete the top Architecture code --------------
 ARCHITECTURE struct OF top IS
 	SIGNAL adderResult : std_logic_vector(n DOWNTO 0);
-	SIGNAL bsResultbsResult : std_logic_vector(n-1 DOWNTO 0);
-	SIGNAL bsResWithZero : std_logic_vector(n DOWNTO 0);
+	SIGNAL bsResultbsResult : std_logic_vector(n DOWNTO 0);
+	SIGNAL XwithZero : std_logic_vector(n DOWNTO 0); -- for the BarrelShfter
+	SIGNAL res :STD_LOGIC_VECTOR(n downto 0));
 	
 BEGIN
+	XwithZero <= '0' & X;
 	AddSub:Adder generic map (n=>n) port map (
 		cin => cin,
-		x => X,		y => Y,
+		x => X,y => Y,
 		sel => sel, 
 		s => adderResult(n-1 downto 0),
 		cout =>adderResult(n)
 	);
-	Bshifter:BarrelShfter generic map (n=>n,m=>3) port map ( -- we did also Y(m) generic as a Bonus
-		x => X,
+	Bshifter:BarrelShfter generic map (n=>n+1,m=>3) port map ( -- we did also Y(m) generic as a Bonus
+		x => XwithZero,
 		yi => Y,
 		s =>bsResultbsResult
 	);
-	bsResWithZero => '0' & bsResultbsResult; -- 0 for the n+1 output we need to send
 	OutSel:outputSelector generic map (n=>n) port map ( 
 		adderResult => adderResult,
-		bsResultbsResult => bsResWithZero, 
+		bsResultbsResult => bsResultbsResult, 
 		sel =>sel,
-		result =>result
+		result =>res
 	);
+	result<= res;
 	
 
 END struct;

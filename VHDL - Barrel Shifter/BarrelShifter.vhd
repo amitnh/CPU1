@@ -5,7 +5,7 @@ USE IEEE.math_real.all;
 ENTITY BarrelShfter IS
   GENERIC (n : INTEGER;m : INTEGER);
   PORT (    x: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
-			yi: IN STD_LOGIC_VECTOR (n-1 DOWNTO 0);
+			yi: IN STD_LOGIC_VECTOR (n-2 DOWNTO 0);
             s: OUT STD_LOGIC_VECTOR(n-1 downto 0));
 END BarrelShfter;
 --------------------------------------------------------------
@@ -22,9 +22,7 @@ END COMPONENT;
 	SIGNAL entry: matrix1;-- matrix of entrie to each muxChain
 	SIGNAL exitMat: matrix2;-- matrix of exits to each muxChain
 	
-BEGIN
-	--entry <= (OTHERS=>(OTHERS=>'0'));
-	--exitMat <= (OTHERS=>(OTHERS=>'0'));
+BEGIN	
 	exitMat(0)<=x;
 		yFor:for i in 0 to m-1 GENERATE
 			muxFor:for j in 0 to n-1-(2**i) GENERATE 

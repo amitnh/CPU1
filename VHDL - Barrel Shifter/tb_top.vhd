@@ -18,17 +18,17 @@ signal result:STD_LOGIC_VECTOR(n downto 0);
 
 
 begin
-        tester : top generic map (n=>n) port map(
-			X=>X,Y=>Y,sel=>sel,cin=>cin
+        tester : top generic map (n) port map(
+			X=>X,Y=>Y,sel=>sel,cin=>cin, result=>result
 		);
         
         testbench : process
         begin
           --------- start of stimulus section - ver1 ------------------
           X <="11111111";
-		   Y <="00000001";
+		   Y <="00000000";
 		   cin<= '0';
-		   sel<="00";
+		   sel<="11";
 		   for i in 0 to 6 loop
 			wait for 50 ns;
 			Y <= Y +1;

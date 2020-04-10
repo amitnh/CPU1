@@ -5,13 +5,13 @@ ENTITY outputSelector IS
   GENERIC (n : INTEGER);
   PORT ( adderResult,bsResultbsResult: IN STD_LOGIC_VECTOR (n DOWNTO 0);
 			sel: IN STD_LOGIC_VECTOR (1 DOWNTO 0);
-            result: OUT STD_LOGIC_VECTOR(n downto 0));
+            res: OUT STD_LOGIC_VECTOR(n downto 0));
 END outputSelector;
 --------------------------------------------------------------
 ARCHITECTURE ops OF outputSelector IS
 	
 BEGIN
-	result <= bsResultbsResult when (sel= "11") else adderResult;
+	res <= bsResultbsResult when (sel= "11") else adderResult;
 	
 END ops;
 

@@ -1,0 +1,90 @@
+-- Test Bench for Counter.
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+USE work.aux_package.all;
+
+
+entity tb_top is
+  GENERIC (n : INTEGER := 4);
+end tb_top;
+
+architecture rtl of tb_top is  
+signal  X,Y:STD_LOGIC_VECTOR (n-1 DOWNTO 0);  --For PART#1
+signal	cin :STD_LOGIC;
+signal	sel :STD_LOGIC_VECTOR (1 DOWNTO 0);
+signal result:STD_LOGIC_VECTOR(n downto 0);
+
+signal  X2,Y2:STD_LOGIC_VECTOR (2*n-1 DOWNTO 0);  --For PART#2
+signal	cin2 :STD_LOGIC;
+signal	sel2 :STD_LOGIC_VECTOR (1 DOWNTO 0);
+signal result2:STD_LOGIC_VECTOR(2*n downto 0);
+
+
+begin
+        tester1 : top generic map (n) port map(
+			X=>X,Y=>Y,sel=>sel,cin=>cin, result=>result
+		);
+        tester2 : top generic map (2*n) port map(
+			X=>X2,Y=>Y2,sel=>sel2,cin=>cin2, result=>result2
+		);
+        testbench : process
+        begin
+		----------Part 1 
+           --------- start of stimulus section - TEST#1 ------------------
+		   for k in 0 to n-1 loop
+				X(k) <= '1' when k%2 = '0' else '0';
+				end loop;
+           --X <="1111";
+		   Y <="0000";
+		   cin<= '0';
+		   sel<="00";
+		   for i in 0 to 3 loop		--SEL FOR
+			wait for 50 ns;
+			cin <= '1';
+			wait for 50 ns;
+			sel <= sel +1;
+			cin <= '0';
+		   end loop;
+		   --------- start of stimulus section - TEST#2 ------------------
+           X <="1010";
+		   Y <="0010";
+		   cin<= '0';
+		   sel<="00";
+		   for i in 0 to 3 loop		--SEL FOR
+			wait for 50 ns;
+			cin <= '1';
+			wait for 50 ns;
+			sel <= sel +1;
+			cin <= '0';
+		   end loop;
+		   --------- start of stimulus section - TEST#3 ------------------
+           X <="0001";
+		   Y <="1010";
+		   cin<= '0';
+		   sel<="00";
+		   for i in 0 to 3 loop		--SEL FOR
+			wait for 50 ns;
+			cin <= '1';
+			wait for 50 ns;
+			sel <= sel +1;
+			cin <= '0';
+		   end loop;
+		   --------- start of stimulus section - TEST#4 ------------------
+           X <="0001";
+		   Y <="1111";
+		   cin<= '0';
+		   sel<="00";
+		   for i in 0 to 3 loop		--SEL FOR
+			wait for 50 ns;
+			cin <= '1';
+			wait for 50 ns;
+			sel <= sel +1;
+			cin <= '0';
+		   end loop;
+          --------- end of stimulus section----------------------------
+		  wait;
+        end process testbench;
+        
+end rtl;

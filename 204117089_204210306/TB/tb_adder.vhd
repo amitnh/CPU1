@@ -22,10 +22,40 @@ architecture rtb of tb is
 begin
 	L0 : Adder generic map (m) port map(cin,x,y,sel,cout,s);
     
-	--------- start of stimulus section ------------------	
+	--------- start of stimulus section ------------------ TEST#1	
         tb : process
         begin
 		  x <= "0000";
+		  y <= "1111";
+		  cin<='0';
+		  sel<="00";
+		  for i in 0 to 2 loop
+			wait for 50 ns;
+			sel <= sel +1;
+		  end loop;
+		  sel<="00";
+		  cin<='1';
+		  for i in 0 to 2 loop
+			wait for 50 ns;
+			sel <= sel +1;
+		  end loop;
+		  ------------------------------------------------TEST#2	
+		  x <= "1111";
+		  y <= "1111";
+		  cin<='0';
+		  sel<="00";
+		  for i in 0 to 2 loop
+			wait for 50 ns;
+			sel <= sel +1;
+		  end loop;
+		  sel<="00";
+		  cin<='1';
+		  for i in 0 to 2 loop
+			wait for 50 ns;
+			sel <= sel +1;
+		  end loop;
+		  ------------------------------------------------TEST#3	
+		  x <= "1111";
 		  y <= "0001";
 		  cin<='0';
 		  sel<="00";
@@ -39,7 +69,10 @@ begin
 			wait for 50 ns;
 			sel <= sel +1;
 		  end loop;
+		  
 		  wait;
+		  
+		  
         end process tb;
 		  		
   

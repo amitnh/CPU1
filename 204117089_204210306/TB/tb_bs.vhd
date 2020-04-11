@@ -7,7 +7,7 @@ use ieee.std_logic_unsigned.all;
 
 
 entity tb_bs is
-  GENERIC (n : INTEGER :=8 ;m : INTEGER :=3);
+  GENERIC (n : INTEGER :=4 ;m : INTEGER :=3);
 end tb_bs;
 
 architecture rtl of tb_bs is  
@@ -30,9 +30,9 @@ begin
         testbench : process
         begin
           --------- start of stimulus section - ver1 ------------------
-          x <="11111111";
-		   yi <="00000000";
-		   for i in 0 to 5 loop
+          x <="1111";
+		   yi <="0000";
+		   for i in 0 to 4 loop
 			wait for 50 ns;
 			yi <= yi +1;
 		  end loop;

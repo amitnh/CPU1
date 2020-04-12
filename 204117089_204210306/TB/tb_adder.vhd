@@ -1,13 +1,14 @@
+-- Test Bench for Adder.
 library IEEE;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 
-entity tb is
+entity tb_adder is
 	constant m : integer := 4;
-end tb;
+end tb_adder;
 
-architecture rtb of tb is
+architecture rtb of tb_adder is
   component Adder is
 	GENERIC (n : INTEGER);
 	PORT (   cin: IN STD_LOGIC;

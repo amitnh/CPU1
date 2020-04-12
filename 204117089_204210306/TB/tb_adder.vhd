@@ -1,13 +1,14 @@
+-- Test Bench for Adder.
 library IEEE;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 
-entity tb is
+entity tb_adder is
 	constant m : integer := 4;
-end tb;
+end tb_adder;
 
-architecture rtb of tb is
+architecture rtb of tb_adder is
   component Adder is
 	GENERIC (n : INTEGER);
 	PORT (   cin: IN STD_LOGIC;
@@ -22,10 +23,40 @@ architecture rtb of tb is
 begin
 	L0 : Adder generic map (m) port map(cin,x,y,sel,cout,s);
     
-	--------- start of stimulus section ------------------	
+	--------- start of stimulus section ------------------ TEST#1	
         tb : process
         begin
 		  x <= "0000";
+		  y <= "1111";
+		  cin<='0';
+		  sel<="00";
+		  for i in 0 to 2 loop
+			wait for 50 ns;
+			sel <= sel +1;
+		  end loop;
+		  sel<="00";
+		  cin<='1';
+		  for i in 0 to 2 loop
+			wait for 50 ns;
+			sel <= sel +1;
+		  end loop;
+		  ------------------------------------------------TEST#2	
+		  x <= "1111";
+		  y <= "1111";
+		  cin<='0';
+		  sel<="00";
+		  for i in 0 to 2 loop
+			wait for 50 ns;
+			sel <= sel +1;
+		  end loop;
+		  sel<="00";
+		  cin<='1';
+		  for i in 0 to 2 loop
+			wait for 50 ns;
+			sel <= sel +1;
+		  end loop;
+		  ------------------------------------------------TEST#3	
+		  x <= "1111";
 		  y <= "0001";
 		  cin<='0';
 		  sel<="00";
@@ -39,7 +70,10 @@ begin
 			wait for 50 ns;
 			sel <= sel +1;
 		  end loop;
+		  
 		  wait;
+		  
+		  
         end process tb;
 		  		
   

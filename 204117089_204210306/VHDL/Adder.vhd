@@ -52,7 +52,7 @@ BEGIN
 			cout => reg(n-1)
 		);
 	s(n-1) <= lastbit;
-	cout <= lastbit;
+	cout <= lastbit when sel="10" else reg(n-1);
 
 END dfl;
 

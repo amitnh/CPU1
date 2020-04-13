@@ -85,8 +85,8 @@ begin
 		  ----------Part 2 
            --------- start of stimulus section - TEST#1 ------------------
 
-           X2 <="11111111";
-		   Y2 <="00000000";
+           X2 <="11011001";
+		   Y2 <="01011100";
 		   cin2<= '0';
 		   sel2<="00";
 		   for i in 0 to 3 loop		--SEL FOR
@@ -97,8 +97,8 @@ begin
 			cin2 <= '0';
 		   end loop;
 		   --------- start of stimulus section - TEST#2 ------------------
-           X2 <="10101010";
-		   Y2 <="00000010";
+           X2 <="11101101";
+		   Y2 <="11111001";
 		   cin2<= '0';
 		   sel2<="00";
 		   for i in 0 to 3 loop		--SEL FOR

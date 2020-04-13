@@ -5,7 +5,7 @@ use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 
 entity tb_adder is
-	constant m : integer := 4;
+	constant m : integer := 8;
 end tb_adder;
 
 architecture rtb of tb_adder is
@@ -26,8 +26,9 @@ begin
 	--------- start of stimulus section ------------------ TEST#1	
         tb : process
         begin
-		  x <= "0000";
-		  y <= "1111";
+
+		  x <= "11101101";
+		  y <= "11111001";
 		  cin<='0';
 		  sel<="00";
 		  for i in 0 to 2 loop
@@ -41,8 +42,8 @@ begin
 			sel <= sel +1;
 		  end loop;
 		  ------------------------------------------------TEST#2	
-		  x <= "1111";
-		  y <= "1111";
+		  x <= "11111111";
+		  y <= "11111111";
 		  cin<='0';
 		  sel<="00";
 		  for i in 0 to 2 loop
@@ -56,8 +57,8 @@ begin
 			sel <= sel +1;
 		  end loop;
 		  ------------------------------------------------TEST#3	
-		  x <= "1111";
-		  y <= "0001";
+		  x <= "11111111";
+		  y <= "00000001";
 		  cin<='0';
 		  sel<="00";
 		  for i in 0 to 2 loop

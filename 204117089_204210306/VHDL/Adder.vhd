@@ -17,6 +17,7 @@ ARCHITECTURE dfl OF Adder IS
 	end component;
 	SIGNAL reg : std_logic_vector(n-1 DOWNTO 0);
 	SIGNAL c0 :std_logic;
+	SIGNAL lastbit :std_logic;
 	SIGNAL yin:std_logic_vector(n-1 DOWNTO 0);
 	
 BEGIN
@@ -34,7 +35,7 @@ BEGIN
 			cout => reg(0)
 	);
 	
-	rest : for i in 1 to n-1 generate
+	rest : for i in 1 to n-2 generate
 		chain : FA port map(
 			xi => x(i),
 			yi => yin(i),--for (X-Y)
@@ -43,8 +44,15 @@ BEGIN
 			cout => reg(i)
 		);
 	end generate;
-	
-	cout <= reg(n-1);
+	last: FA port map(
+			xi => x(n-1),
+			yi => yin(n-1),--for (X-Y)
+			cin => reg(n-2),
+			s => lastbit,
+			cout => reg(n-1)
+		);
+	s(n-1) <= lastbit;
+	cout <= lastbit;
 
 END dfl;
 
